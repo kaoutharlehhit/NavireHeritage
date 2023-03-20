@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GestionNavire.Exceptions;
+using Station.Interfaces;
 
 namespace NavireHeritage.classesMetier
 {
-    class Cargo : Navire
+    class Cargo : Navire, iNavCommercable
     {
         private string typeFret;
 
@@ -18,6 +19,15 @@ namespace NavireHeritage.classesMetier
 
         public string TypeFret { get => typeFret; set => typeFret = value; }
 
+        public void Decharger(int qte)
+        {
+
+        }
+
+        public void Charger(int qte)
+        {
+
+        }
 
 
     }
