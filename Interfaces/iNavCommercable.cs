@@ -8,5 +8,7 @@ namespace Station.Interfaces
 {
     interface iNavCommercable
     {
+        void Dercharger(int qte);
+        void Charger(int qte);
     }
 }
