@@ -10,9 +10,11 @@ namespace NavireHeritage.classesMetier
     {
         private String typeFluide;
 
-        public Tanker(string imo, string nom, double latitude, double longitude, double tonnageActuel, double tonnageGT, double tonnageDWT, string typeFluide) : base(imo, nom, latitude, longitude, tonnageActuel, tonnageGT, tonnageDWT)
+        public Tanker(string imo, string nom, string latitude, string longitude, double tonnageActuel, double tonnageGT, double tonnageDWT, string typeFluide) : base(imo, nom, latitude, longitude, tonnageActuel, tonnageGT, tonnageDWT)
         {
-            this.typeFluide = typeFluide;
+            this.TypeFluide = typeFluide;
         }
+
+        public string TypeFluide { get => typeFluide; set => typeFluide = value; }
     }
 }

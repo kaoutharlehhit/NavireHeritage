@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace NavireHeritage.classesMetier
 {
-    abstract class Navire
+    public abstract class Navire
     {
         private readonly String imo;
         private readonly String nom;
-        private Double latitude;
-        private Double longitude;
+        private String latitude;
+        private String longitude;
         private Double tonnageActuel;
         private Double tonnageGT;
         private Double tonnageDWT;
 
         
-        protected Navire(string imo, string nom, double latitude, double longitude, double tonnageActuel, double tonnageGT, double tonnageDWT)
+        protected Navire(string imo, string nom, string latitude, string longitude, double tonnageActuel, double tonnageGT, double tonnageDWT)
         {
             this.imo = imo;
             this.nom = nom;
@@ -32,8 +32,8 @@ namespace NavireHeritage.classesMetier
 
         public string Nom => nom;
 
-        public double Latitude { get => latitude; set => latitude = value; }
-        public double Longitude { get => longitude; set => longitude = value; }
+        public String Latitude { get => latitude; set => latitude = value; }
+        public String Longitude { get => longitude; set => longitude = value; }
         public double TonnageActuel { get => tonnageActuel; set => tonnageActuel = value; }
         public double TonnageGT { get => tonnageGT; set => tonnageGT = value; }
         public double TonnageDWT { get => tonnageDWT; set => tonnageDWT = value; }

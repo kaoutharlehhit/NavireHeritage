@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GestionNavire.Exceptions;
 
 namespace NavireHeritage.classesMetier
 {
@@ -10,7 +11,7 @@ namespace NavireHeritage.classesMetier
     {
         private string typeFret;
 
-        public Cargo(string imo, string nom, double latitude, double longitude, double tonnageActuel, double tonnageGT, double tonnageDWT, string typeFret) : base(imo, nom, latitude, longitude,tonnageActuel, tonnageGT, tonnageDWT)
+        public Cargo(string imo, string nom, string latitude, string longitude, double tonnageActuel, double tonnageGT, double tonnageDWT, string typeFret) : base(imo, nom, latitude, longitude,tonnageActuel, tonnageGT, tonnageDWT)
         {
             this.typeFret = typeFret;
         }

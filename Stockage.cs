@@ -12,7 +12,7 @@ namespace NavireHeritage.classesMetier
         private int capaciteMaxi;
         private int capacitéDispo;
 
-        public Stockage(string imo, string nom, double latitude, double longitude, double tonnageActuel, double tonnageGT, double tonnageDWT, int numero, int capaciteMaxi, int capacitéDispo) : base(imo, nom, latitude, longitude, tonnageActuel, tonnageGT, tonnageDWT)
+        public Stockage(string imo, string nom, string latitude, string longitude, double tonnageActuel, double tonnageGT, double tonnageDWT, int numero, int capaciteMaxi, int capacitéDispo) : base(imo, nom, latitude, longitude, tonnageActuel, tonnageGT, tonnageDWT)
         {
             this.numero = numero;
             this.capaciteMaxi = capaciteMaxi;

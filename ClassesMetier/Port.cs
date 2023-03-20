@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using GestionNavire.Exceptions;
 using NavireHeritage.classesMetier;
+using Station.Interfaces;
 
 namespace NavireHeritage.classesMetier
 {
-    class Port
+    public class Port : Istationable
+
     {
         private String nom;
         private String latitude;
@@ -49,43 +51,88 @@ namespace NavireHeritage.classesMetier
         internal Dictionary<string, Navire> NavirePartis { get => navirePartis; set => navirePartis = value; }
         internal Dictionary<string, Navire> NavireEnAttente { get => navireEnAttente; set => navireEnAttente = value; }
 
-        public void EnregistrerArrivee(Stri)
+        public void EnregistrerArrivee(String id)
         {
-            try
+            //try
+            //{
+            //    if (this.navireAttendus.Count < this.NbPortique)
+            //    {
+            //        this.navireAttendus.Add(navirePortique.Imo, navirePortique);
+            //    }
+            //    else
+            //    {
+            //        throw new GestionPortExceptions("Ajout impossible");
+            //    }
+            //}
+            //catch
+            //{
+            //    throw new GestionPortExceptions("Le navire " + navirePortique.Imo + " est déjà enregistré");
+            //}
+        }
+
+        public void EnregistrerArriveePrevue(Object objet)
+        {
+            if(objet is Navire)
             {
-                if (this.navireAttendus.Count < this.NbPortique)
-                {
-                    this.navireAttendus.Add(navirePortique.Imo, navirePortique);
-                }
-                else
-                {
-                    throw new GestionPortExceptions("Ajout impossible");
-                }
+               
+                // on va caster l'objet en navire
+                Navire navire = (Navire)objet;
+                if(this.navireAttendus.ContainsKey(navire.Imo))
+
+                    this.navireAttendus.Add(navire.Imo, navire);
+                //else
+                //{
+                //    throw new Exception
+                //        ("Le navire" + navire.Imo + "est déja attendus");
+                //}
+
+          
             }
-            catch
-            {
-                throw new GestionPortExceptions("Le navire " + navirePortique.Imo + " est déjà enregistré");
-            }
+            
+        }
+
+        public void EnregistrerDepart(String id)
+        {
+
         }
 
 
-        public void EnregistrerArrivee(Navire navirePassager)
+        //public void EnregistrerArrivee(Navire navirePassager)
+        //{
+        //    try
+        //    {
+        //        if (this.navireAttendus.Count < this.NbQuaisPassager)
+        //        {
+        //            this.navireAttendus.Add(navirePassager.Imo, navirePassager);
+        //        }
+        //        else
+        //        {
+        //            throw new GestionPortExceptions("Ajout impossible");
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        throw new GestionPortExceptions("Le navire " + navirePassager.Imo + " est déjà enregistré");
+        //    }
+        //}
+
+        public int GetNbCargoArrives()
         {
-            try
+            //on met un compteur pour compter le nombre de cargo et on return nb 
+            int nb = 0;
+            foreach (Navire navire in this.navireArrives.Values)
             {
-                if (this.navireAttendus.Count < this.NbQuaisPassager)
+                if (navire is Cargo)
                 {
-                    this.navireAttendus.Add(navirePassager.Imo, navirePassager);
-                }
-                else
-                {
-                    throw new GestionPortExceptions("Ajout impossible");
+                    nb++;
                 }
             }
-            catch
-            {
-                throw new GestionPortExceptions("Le navire " + navirePassager.Imo + " est déjà enregistré");
-            }
+            return nb;
         }
+        public override String ToString()
+        {
+            return "Port de " + this.nom + "\n Coordonnées GPS : " + this.latitude + "  /  " + this.longitude + "\n Nb portiques : " + this.nbPortique + "\n Nb quais tankers :" + this.nbQuaisTanker + "\n Nb quais super tankers :" + this.nbQuaisSuperTanker ;
+        }
+
     }
 }

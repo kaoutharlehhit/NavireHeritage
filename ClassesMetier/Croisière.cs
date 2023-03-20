@@ -12,11 +12,12 @@ namespace NavireHeritage.classesMetier
         private int nbPassagersMaxi;
         private Dictionary<String, Passager> Passagers;
 
-        public Croisière(string imo, string nom, double latitude, double longitude, double tonnageActuel, double tonnageGT, double tonnageDWT,string typeNavireCroisière, int nbPassagersMaxi, Dictionary<string, Passager> passagers) :base(imo, nom, latitude, longitude, tonnageActuel, tonnageGT, tonnageDWT)
+        public Croisière(string imo, string nom, string latitude, string longitude, double tonnageActuel, double tonnageGT, double tonnageDWT,string typeNavireCroisière, int nbPassagersMaxi, Dictionary<string, Passager> passagers) :base(imo, nom, latitude, longitude, tonnageActuel, tonnageGT, tonnageDWT)
         {
             this.typeNavireCroisière = typeNavireCroisière;
             this.nbPassagersMaxi = nbPassagersMaxi;
             Passagers = passagers;
+            
         }
 
         public string TypeNavireCroisière { get => typeNavireCroisière; set => typeNavireCroisière = value; }
