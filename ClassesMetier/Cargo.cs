@@ -21,12 +21,12 @@ namespace NavireHeritage.classesMetier
 
         public void Decharger(int qte)
         {
-
+                this.TonnageActuel -= qte;
         }
 
         public void Charger(int qte)
         {
-
+                this.TonnageActuel += qte;
         }
 
 
