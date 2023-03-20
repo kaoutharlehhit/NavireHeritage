@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NavireHeritage.classesMetier
 {
-    class Croisière : Navire, //ICroisierable
+    class Croisière : Navire //ICroisierable
     {
         private String typeNavireCroisière;
         private int nbPassagersMaxi;

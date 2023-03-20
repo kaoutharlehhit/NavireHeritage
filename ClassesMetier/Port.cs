@@ -96,6 +96,10 @@ namespace NavireHeritage.classesMetier
 
         }
 
+        private void AjoutNavireEnAttente(Object objet)
+        {
+
+        }
 
         //public void EnregistrerArrivee(Navire navirePassager)
         //{
@@ -115,6 +119,26 @@ namespace NavireHeritage.classesMetier
         //        throw new GestionPortExceptions("Le navire " + navirePassager.Imo + " est déjà enregistré");
         //    }
         //}
+        public bool EstAttendu(String imo)
+        {
+            return true;
+        }
+        public bool EstPresent(String imo)
+        {
+            return true;
+        }
+        public void EstEnAttente(String imo)
+        {
+
+        }
+        public void Chargement(String imo, int qte)
+        {
+
+        } 
+        public void Dechargement(String imo, int qte)
+        {
+
+        }
 
         public int GetNbCargoArrives()
         {
@@ -129,9 +153,33 @@ namespace NavireHeritage.classesMetier
             }
             return nb;
         }
+
+        public bool EstParti(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetUnAttendu(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetUnArrive(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetUnParti(string id)
+        {
+            throw new NotImplementedException();
+        }
         public override String ToString()
         {
-            return "Port de " + this.nom + "\n Coordonnées GPS : " + this.latitude + "  /  " + this.longitude + "\n Nb portiques : " + this.nbPortique + "\n Nb quais tankers :" + this.nbQuaisTanker + "\n Nb quais super tankers :" + this.nbQuaisSuperTanker ;
+            return "Port de " + this.nom 
+                + "\n Coordonnées GPS : " + this.latitude + "  /  " + this.longitude 
+                + "\n       Nb portiques : " + this.nbPortique 
+                + "\n       Nb quais tankers :" + this.nbQuaisTanker 
+                + "\n       Nb quais super tankers :" + this.nbQuaisSuperTanker ;
         }
 
     }
