@@ -156,6 +156,32 @@ namespace NavireHeritage.classesMetier
             }
             return nb;
         }
+        public int GetNbTankerArrives()
+        {
+            //on met un compteur pour compter le nombre de cargo et on return nb 
+            int nb = 0;
+            foreach (Navire navire in this.navireArrives.Values)
+            {
+                if (navire is Tanker && navire.TonnageGT <= 130000)
+                {
+                    nb++;
+                }
+            }
+            return nb;
+        }
+        public int GetNbSuperTankerArrives()
+        {
+            //on met un compteur pour compter le nombre de cargo et on return nb 
+            int nb = 0;
+            foreach (Navire navire in this.navireArrives.Values)
+            {
+                if (navire is Tanker && navire.TonnageGT > 130000)
+                {
+                    nb++;
+                }
+            }
+            return nb;
+        }
 
         public bool EstParti(string id)
         {
@@ -183,18 +209,19 @@ namespace NavireHeritage.classesMetier
         }
         public override String ToString()
         {
-            return "Port de " + this.nom 
-                + "\n Coordonnées GPS : " + this.latitude + "  /  " + this.longitude 
-                + "\n       Nb portiques : " + this.nbPortique 
-                + "\n       Nb quais tankers :" + this.nbQuaisTanker 
-                + "\n       Nb quais super tankers :" + this.nbQuaisSuperTanker 
+            return "Port de " + this.nom
+                + "\n Coordonnées GPS : " + this.latitude + "  /  " + this.longitude
+                + "\n       Nb portiques : " + this.nbPortique
+                + "\n       Nb quais tankers :" + this.nbQuaisTanker
+                + "\n       Nb quais super tankers :" + this.nbQuaisSuperTanker
                 + "\n       Nb Navires à quai : " + this.navireArrives.Count
                 + "\n       Nb Navirre attendus: " + this.navireAttendus
                 + "\n       Nb Navires à partis : " + this.navirePartis
                 + "\n       Nb Navires en attente : " + this.navireEnAttente
 
-                + "\n Nombre de cargos dans le port : " this.GetNbCargoArrives
-                + "\n Nombre de tankers dans le port : " this.nbQuaisTanker
+                + "\n Nombre de cargos dans le port : " + this.GetNbCargoArrives()
+                + "\n Nombre de tankers dans le port : " + this.GetNbTankerArrives()
+                + "\n Nombre de super tankers dans le port : " + this.GetNbSuperTankerArrives();
 
         }
 
