@@ -77,16 +77,20 @@ namespace NavireHeritage.classesMetier
                
                 // on va caster l'objet en navire
                 Navire navire = (Navire)objet;
-                if(this.navireAttendus.ContainsKey(navire.Imo))
+                if(!this.navireAttendus.ContainsKey(navire.Imo))
 
                     this.navireAttendus.Add(navire.Imo, navire);
-                //else
-                //{
-                //    throw new Exception
-                //        ("Le navire" + navire.Imo + "est déja attendus");
-                //}
+                else
+                {
+                    throw new GestionPortExceptions
+                        ("Le navire" + navire.Imo + "est déja attendus");
+                }
 
-          
+
+            }
+            else
+            {
+                throw new GestionPortExceptions("Veuillez mettre un bâteau");
             }
             
         }
@@ -215,9 +219,9 @@ namespace NavireHeritage.classesMetier
                 + "\n       Nb quais tankers :" + this.nbQuaisTanker
                 + "\n       Nb quais super tankers :" + this.nbQuaisSuperTanker
                 + "\n       Nb Navires à quai : " + this.navireArrives.Count
-                + "\n       Nb Navirre attendus: " + this.navireAttendus
-                + "\n       Nb Navires à partis : " + this.navirePartis
-                + "\n       Nb Navires en attente : " + this.navireEnAttente
+                + "\n       Nb Navirre attendus: " + this.navireAttendus.Count
+                + "\n       Nb Navires à partis : " + this.navirePartis.Count
+                + "\n       Nb Navires en attente : " + this.navireEnAttente.Count
 
                 + "\n Nombre de cargos dans le port : " + this.GetNbCargoArrives()
                 + "\n Nombre de tankers dans le port : " + this.GetNbTankerArrives()

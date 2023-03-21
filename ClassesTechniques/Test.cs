@@ -32,12 +32,17 @@ namespace NavireHeritage.ClassesTechniques
 
         internal static void AfficheAttendus(Port port)
         {
-            //throw new NotImplementedException();
+            Console.WriteLine("Liste des bateaux en attente de leur arrivée:");
+            foreach(Navire navire in port.NavireAttendus.Values)
+            {
+                Console.WriteLine($"{navire.Imo}    {navire.Nom} : {navire.GetType().Name}");
+            }
         }
+
 
         internal static void testEnregistrerDepart(Port port, string v)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
