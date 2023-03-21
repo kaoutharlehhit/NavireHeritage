@@ -96,11 +96,6 @@ namespace NavireHeritage.classesMetier
 
         }
 
-        private void AjoutNavireEnAttente(Object objet)
-        {
-
-        }
-
         //public void EnregistrerArrivee(Navire navirePassager)
         //{
         //    try
@@ -119,25 +114,33 @@ namespace NavireHeritage.classesMetier
         //        throw new GestionPortExceptions("Le navire " + navirePassager.Imo + " est déjà enregistré");
         //    }
         //}
+        public void Chargement(String imo, int qte)
+        {
+
+        }
+        public void Dechargement(String imo, int qte)
+        {
+
+        }
+
+        private void AjoutNavireEnAttente(Object objet)
+        {
+
+        }
+
+        public bool EstEnAttente(String imo)
+        {
+            return true;
+        }
+
         public bool EstAttendu(String imo)
         {
             return true;
         }
+
         public bool EstPresent(String imo)
         {
             return true;
-        }
-        public void EstEnAttente(String imo)
-        {
-
-        }
-        public void Chargement(String imo, int qte)
-        {
-
-        } 
-        public void Dechargement(String imo, int qte)
-        {
-
         }
 
         public int GetNbCargoArrives()
@@ -173,13 +176,26 @@ namespace NavireHeritage.classesMetier
         {
             throw new NotImplementedException();
         }
+
+        public object GetUnEnAttente(string imo)
+        {
+            return new object();
+        }
         public override String ToString()
         {
             return "Port de " + this.nom 
                 + "\n Coordonnées GPS : " + this.latitude + "  /  " + this.longitude 
                 + "\n       Nb portiques : " + this.nbPortique 
                 + "\n       Nb quais tankers :" + this.nbQuaisTanker 
-                + "\n       Nb quais super tankers :" + this.nbQuaisSuperTanker ;
+                + "\n       Nb quais super tankers :" + this.nbQuaisSuperTanker 
+                + "\n       Nb Navires à quai : " + this.navireArrives.Count
+                + "\n       Nb Navirre attendus: " + this.navireAttendus
+                + "\n       Nb Navires à partis : " + this.navirePartis
+                + "\n       Nb Navires en attente : " + this.navireEnAttente
+
+                + "\n Nombre de cargos dans le port : " this.GetNbCargoArrives
+                + "\n Nombre de tankers dans le port : " this.nbQuaisTanker
+
         }
 
     }
