@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace NavireHeritage.classesMetier
 {
-    class Croisière : Navire //ICroisierable
+    class Croisière : Navire, 
+        ICroisierable
     {
         private String typeNavireCroisière;
         private int nbPassagersMaxi;
@@ -51,10 +52,21 @@ namespace NavireHeritage.classesMetier
         }
         void Debarquer(List<Object> objects)
         {
-            foreach(Passager passager in objects)
+            foreach(Object passager in passagers)
             {
 
             }
+            
+        }
+
+        void ICroisierable.Embarquer(List<object> objets)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICroisierable.Debarquer(List<object> objects)
+        {
+            throw new NotImplementedException();
         }
     }
 }
