@@ -9,7 +9,7 @@ namespace Station.Interfaces
     interface ICroisierable
     {
         void Embarquer(List<Object> objets);
-        void Debarquer(List<Object> objects);
+        List<Object> Debarquer(List<Object> objects);
 
     }
 }

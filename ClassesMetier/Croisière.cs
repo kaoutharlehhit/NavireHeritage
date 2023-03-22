@@ -37,7 +37,7 @@ namespace NavireHeritage.classesMetier
         internal Dictionary<string, Passager> Passagers { get => this.passagers; set => this.passagers = value; }
 
 
-        void Embarquer(List<Object> objets)
+        public void Embarquer(List<Object> objets)
         {
             foreach(Passager passager in objets) {
                 if(this.Passagers.Count < this.nbPassagersMaxi)
@@ -50,23 +50,22 @@ namespace NavireHeritage.classesMetier
                 }
             }
         }
-        void Debarquer(List<Object> objects)
+        public List<Object> Debarquer(List<Object> objets)
         {
-            foreach(Object passager in passagers)
+            List<Object> listPassager = new List<Object>();
+            foreach(Passager passager in this.passagers.Values)
             {
-
+                if (objets.Contains(passager))
+                {
+                    this.passagers.Remove(passager.NumPasseport);
+                }
+                else
+                {
+                    listPassager.Add(passager);
+                }
             }
+            return listPassager;
             
-        }
-
-        void ICroisierable.Embarquer(List<object> objets)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICroisierable.Debarquer(List<object> objects)
-        {
-            throw new NotImplementedException();
         }
     }
 }
