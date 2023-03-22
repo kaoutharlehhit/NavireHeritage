@@ -134,16 +134,18 @@ namespace NavireHeritage.classesMetier
                 this.NavireArrives.Remove(id);
                 bool placePrise = false;
                 int i = 0;
-                while(!placePrise && i < this.NavireAttendus.Count)
+                while(!placePrise && i < this.NavireEnAttente.Count)
                 {
-                    KeyValuePair<string, Navire> unNavireEnAttente = this.navireEnAttente.ElementAt(i);
-                    if (unNavireEnAttente.Value.GetType() == navire.GetType())
+                    Navire unNavireEnAttente = this.navireEnAttente.ElementAt(i).Value;
+                    if (unNavireEnAttente.GetType() == navire.GetType())
                     {
                         placePrise = true;
-                        this.EnregistrerArrivee(unNavireEnAttente.Key);
-                        this.NavireEnAttente.Remove(unNavireEnAttente.Key)
+                        //this.EnregistrerArrivee(unNavireEnAttente.Key);
+                        //this.NavireEnAttente.Remove(unNavireEnAttente.Key);
                     }
+                    i++;
                 }
+                Console.WriteLine($"Le navire {id} est partit");
             }
             else
             {
