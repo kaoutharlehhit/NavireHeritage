@@ -129,7 +129,21 @@ namespace NavireHeritage.classesMetier
         {
             if (EstPresent(id))
             {
-                
+                Navire navire = (Navire)GetUnArrive(id);
+                this.NavirePartis.Add(id, navire);
+                this.NavireArrives.Remove(id);
+                bool placePrise = false;
+                int i = 0;
+                while(!placePrise && i < this.NavireAttendus.Count)
+                {
+                    KeyValuePair<string, Navire> unNavireEnAttente = this.navireEnAttente.ElementAt(i);
+                    if (unNavireEnAttente.Value.GetType() == navire.GetType())
+                    {
+                        placePrise = true;
+                        this.EnregistrerArrivee(unNavireEnAttente.Key);
+                        this.NavireEnAttente.Remove(unNavireEnAttente.Key)
+                    }
+                }
             }
             else
             {
@@ -241,7 +255,7 @@ namespace NavireHeritage.classesMetier
 
         public object GetUnArrive(string id)
         {
-            throw new NotImplementedException();
+            return this.NavireArrives[id];
         }
 
         public object GetUnParti(string id)
@@ -251,7 +265,7 @@ namespace NavireHeritage.classesMetier
 
         public object GetUnEnAttente(string imo)
         {
-            return new object();
+            return this.navireEnAttente[imo];
         }
         public override String ToString()
         {
