@@ -70,7 +70,7 @@ namespace NavireHeritage.ClassesTechniques
             try
             {
                 port.EnregistrerArrivee(imo);
-                Console.WriteLine("navire " + imo + "arrivé");
+                Console.WriteLine("navire " + imo + " arrivé");
             }
             catch(Exception ex)
             {
@@ -89,7 +89,14 @@ namespace NavireHeritage.ClassesTechniques
 
         internal static void testEnregistrerDepart(Port port, string v)
         {
-            port.EnregistrerDepart(v);
+            try
+            {
+
+                port.EnregistrerDepart(v);
+            } catch (GestionPortExceptions ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

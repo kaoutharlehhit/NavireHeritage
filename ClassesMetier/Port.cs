@@ -91,7 +91,7 @@ namespace NavireHeritage.classesMetier
                 }
                 else
                 {
-                    throw new Exception($"Le navire {id} n'est pas attendu");
+                    throw new Exception($"Le navire {id} n'est pas attendu ou est déja arrivée dans le port");
                 }
             }
             catch (Exception ex)
@@ -129,7 +129,7 @@ namespace NavireHeritage.classesMetier
         {
             if (!navireArrives.ContainsKey(id))
             {
-                throw new Exception("Enregistrement départ impossible pour" + id + ", le n'est pas dans le port");
+                throw new GestionPortExceptions("Enregistrement départ impossible pour" + id + ", le navire n'est pas dans le port");
             }
 
         }
@@ -278,9 +278,9 @@ namespace NavireHeritage.classesMetier
             return "Port de " + this.nom
                 + "\n Coordonnées GPS : " + this.latitude + "  /  " + this.longitude
                 + "\n       Nb portiques : " + this.nbPortique
-                + "\n       Nb quais crosière : " 
-                + "\n       Nb quais tankers :" + this.nbQuaisTanker
-                + "\n       Nb quais super tankers :" + this.nbQuaisSuperTanker
+                + "\n       Nb quais crosière : " + this.nbQuaisPassager
+                + "\n       Nb quais tankers : " + this.nbQuaisTanker
+                + "\n       Nb quais super tankers : " + this.nbQuaisSuperTanker
                 + "\n       Nb Navires à quai : " + this.navireArrives.Count
                 + "\n       Nb Navirre attendus: " + this.navireAttendus.Count
                 + "\n       Nb Navires à partis : " + this.navirePartis.Count
