@@ -55,7 +55,7 @@ namespace NavireHeritage.classesMetier
         {
             try
             {
-                if (EstAttendu(id))
+                if (EstAttendu(id) || EstEnAttente(id))
                 {
                     if (GetUnAttendu(id) is Croisière && this.GetNbCroisiereArrives() < this.nbQuaisPassager)
                     {
@@ -136,8 +136,8 @@ namespace NavireHeritage.classesMetier
                 int i = 0;
                 while(!placePrise && i < this.NavireEnAttente.Count)
                 {
-                    Navire unNavireEnAttente = this.navireEnAttente.ElementAt(i).Value;
-                    if (unNavireEnAttente.GetType() == navire.GetType())
+                    KeyValuePair<string, Navire> unNavireEnAttente = this.navireEnAttente.ElementAt(i);
+                    if (unNavireEnAttente.Values.GetType() == navire.GetType())
                     {
                         placePrise = true;
                         //this.EnregistrerArrivee(unNavireEnAttente.Key);
@@ -149,7 +149,7 @@ namespace NavireHeritage.classesMetier
             }
             else
             {
-                throw new GestionPortExceptions("Enregistrement départ impossible pour" + id + ", le navire n'est pas dans le port");
+                throw new GestionPortExceptions("Enregistrement départ impossible pour " + id + ", le navire n'est pas dans le port");
             }
 
         }
