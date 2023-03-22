@@ -19,8 +19,9 @@ namespace NavireHeritage
                 Test.ChargementInitial(port);
                 Console.WriteLine("======================================");
                 Console.WriteLine(port);
+                Console.WriteLine("======================================");
                 Test.AfficheAttendus(port);
-
+                Console.WriteLine("======================================");
                 Test.TesteEnregistrerArriveePrevue(port, new Cargo("IMO9780859", "CMA CGM A. LINCOLN", "43.43279 N", "134.76258 W",
                 140872, 148992, 123000, "marchandises diverses"));
                 /*		 
