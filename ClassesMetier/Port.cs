@@ -57,7 +57,7 @@ namespace NavireHeritage.classesMetier
             {
                 if (EstAttendu(id))
                 {
-                    if (GetUnAttendu(id) is Croisière && this. > 0)
+                    if (GetUnAttendu(id) is Croisière && this.GetNbCroisiereArrives() < this.nbQuaisPassager)
                     {
                         this.AjoutNavireArrivee(GetUnAttendu(id));
                     }
@@ -173,6 +173,20 @@ namespace NavireHeritage.classesMetier
         public bool EstPresent(String imo)
         {
             return this.navireArrives.ContainsKey(imo); 
+        }
+
+        public int GetNbCroisiereArrives()
+        {
+            //on met un compteur pour compter le nombre de cargo et on return nb 
+            int nb = 0;
+            foreach (Navire navire in this.navireArrives.Values)
+            {
+                if (navire is Croisière)
+                {
+                    nb++;
+                }
+            }
+            return nb;
         }
 
         public int GetNbCargoArrives()
