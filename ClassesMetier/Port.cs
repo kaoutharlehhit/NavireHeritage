@@ -51,47 +51,25 @@ namespace NavireHeritage.classesMetier
         internal Dictionary<string, Navire> NavirePartis { get => navirePartis; set => navirePartis = value; }
         internal Dictionary<string, Navire> NavireEnAttente { get => navireEnAttente; set => navireEnAttente = value; }
 
-        public void EnregistrerArrivee(String id)
+        public void EnregistrerArrivee(String imo)
         {
             try
             {
-                if (EstAttendu(id) || EstEnAttente(id))
+                if (EstAttendu(imo))
                 {
-                    if (GetUnAttendu(id) is Croisière && this.GetNbCroisiereArrives() < this.nbQuaisPassager)
+                    Navire unNavire = (Navire)GetUnAttendu(imo);
+                    if (unNavire is Croisière && this.GetNbCroisiereArrives() < this.nbQuaisPassager)
                     {
-                        this.AjoutNavireArrivee(GetUnAttendu(id));
-                    }
-                    else if (GetUnAttendu(id) is Cargo)
-                    {
-                        if (this.GetNbCargoArrives() < this.nbPortique)
-                        {
-                            this.AjoutNavireArrivee(GetUnAttendu(id));
-                        }
-                        else
-                        {
-                            this.AjoutNavireEnAttente(GetUnAttendu(id));
-                        }
+                        this.AjoutNavireArrivee(GetUnAttendu(imo));
                     }
                     else
                     {
-                        Tanker tanker = (Tanker)GetUnAttendu(id);
-                        if (tanker.TonnageGT <= 130000 && this.GetNbTankerArrives() >= this.nbQuaisTanker)
-                        {
-                            this.AjoutNavireEnAttente(tanker);
-                        }
-                        else if (tanker.TonnageGT > 130000 && this.GetNbSuperTankerArrives() >= this.nbQuaisSuperTanker)
-                        {
-                            this.AjoutNavireEnAttente(tanker);
-                        }
-                        else
-                        {
-                            this.AjoutNavireArrivee(tanker);
-                        }
+                        AjoutNavireMarchand(unNavire);
                     }
                 }
                 else
                 {
-                    throw new Exception($"Le navire {id} n'est pas attendu ou est déja arrivée dans le port");
+                    throw new Exception($"Le navire {imo} n'est pas attendu ou est déja arrivée dans le port");
                 }
             }
             catch (Exception ex)
@@ -102,11 +80,8 @@ namespace NavireHeritage.classesMetier
 
         public void EnregistrerArriveePrevue(Object objet)
         {
-            if (objet is Navire)
+            if (objet is Navire navire)
             {
-
-                // on va caster l'objet en navire
-                Navire navire = (Navire)objet;
                 if (!this.navireAttendus.ContainsKey(navire.Imo))
 
                     this.navireAttendus.Add(navire.Imo, navire);
@@ -125,31 +100,31 @@ namespace NavireHeritage.classesMetier
 
         }
 
-        public void EnregistrerDepart(String id)
+        public void EnregistrerDepart(String imo)
         {
-            if (EstPresent(id))
+            if (EstPresent(imo))
             {
-                Navire navire = (Navire)GetUnArrive(id);
-                this.NavirePartis.Add(id, navire);
-                this.NavireArrives.Remove(id);
+                Navire navire = (Navire)GetUnArrive(imo);
+                this.NavirePartis.Add(imo, navire);
+                this.NavireArrives.Remove(imo);
                 bool placePrise = false;
                 int i = 0;
-                while(!placePrise && i < this.NavireEnAttente.Count)
+                while (!placePrise && i < this.NavireEnAttente.Count)
                 {
                     KeyValuePair<string, Navire> unNavireEnAttente = this.navireEnAttente.ElementAt(i);
-                    if (unNavireEnAttente.Values.GetType() == navire.GetType())
+                    if (unNavireEnAttente.Value.GetType() == navire.GetType())
                     {
                         placePrise = true;
-                        //this.EnregistrerArrivee(unNavireEnAttente.Key);
-                        //this.NavireEnAttente.Remove(unNavireEnAttente.Key);
+                        this.navireArrives.Add(unNavireEnAttente.Key, unNavireEnAttente.Value);
+                        this.NavireEnAttente.Remove(unNavireEnAttente.Key);
                     }
                     i++;
                 }
-                Console.WriteLine($"Le navire {id} est partit");
+                Console.WriteLine($"Le navire {imo} est partit");
             }
             else
             {
-                throw new GestionPortExceptions("Enregistrement départ impossible pour " + id + ", le navire n'est pas dans le port");
+                throw new GestionPortExceptions("Enregistrement départ impossible pour " + imo + ", le navire n'est pas dans le port");
             }
 
         }
@@ -176,6 +151,37 @@ namespace NavireHeritage.classesMetier
             this.navireAttendus.Remove(navire.Imo);
         }
 
+        private void AjoutNavireMarchand(Navire navire)
+        {
+            if (navire is Cargo)
+            {
+                if (this.GetNbCargoArrives() < this.nbPortique)
+                {
+                    this.AjoutNavireArrivee(GetUnAttendu(navire.Imo));
+                }
+                else
+                {
+                    this.AjoutNavireEnAttente(GetUnAttendu(navire.Imo));
+                }
+            }
+            else
+            {
+                Tanker tanker = (Tanker)navire;
+                if (tanker.TonnageGT <= 130000 && this.GetNbTankerArrives() >= this.nbQuaisTanker)
+                {
+                    this.AjoutNavireEnAttente(tanker);
+                }
+                else if (tanker.TonnageGT > 130000 && this.GetNbSuperTankerArrives() >= this.nbQuaisSuperTanker)
+                {
+                    this.AjoutNavireEnAttente(tanker);
+                }
+                else
+                {
+                    this.AjoutNavireArrivee(tanker);
+                }
+            }
+        }
+
         public bool EstEnAttente(String imo)
         {
             return this.navireEnAttente.ContainsKey(imo);
@@ -188,7 +194,7 @@ namespace NavireHeritage.classesMetier
 
         public bool EstPresent(String imo)
         {
-            return this.navireArrives.ContainsKey(imo); 
+            return this.navireArrives.ContainsKey(imo);
         }
 
         public int GetNbCroisiereArrives()
@@ -245,7 +251,7 @@ namespace NavireHeritage.classesMetier
             return nb;
         }
 
-        public bool EstParti(string id)
+        public bool EstParti(string imo)
         {
             throw new NotImplementedException();
         }
