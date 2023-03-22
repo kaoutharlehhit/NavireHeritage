@@ -253,22 +253,22 @@ namespace NavireHeritage.classesMetier
 
         public bool EstParti(string imo)
         {
-            throw new NotImplementedException();
+            return this.NavirePartis.ContainsKey(imo);
         }
 
-        public object GetUnAttendu(string id)
+        public object GetUnAttendu(string imo)
         {
-            return this.navireAttendus[id];
+            return this.navireAttendus[imo];
         }
 
-        public object GetUnArrive(string id)
+        public object GetUnArrive(string imo)
         {
-            return this.NavireArrives[id];
+            return this.NavireArrives[imo];
         }
 
-        public object GetUnParti(string id)
+        public object GetUnParti(string imo)
         {
-            throw new NotImplementedException();
+            return this.NavirePartis[imo];
         }
 
         public object GetUnEnAttente(string imo)
