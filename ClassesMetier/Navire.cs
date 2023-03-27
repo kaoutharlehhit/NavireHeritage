@@ -36,6 +36,6 @@ namespace NavireHeritage.classesMetier
         public String Longitude { get => longitude; set => longitude = value; }
         public double TonnageActuel { get => tonnageActuel; set => tonnageActuel = value; }
         public double TonnageGT { get => tonnageGT; set => tonnageGT = value; }
-        public double TonnageDWT { get => tonnageDWT; set => tonnageDWT = value; }
+        public double TonnageDWT { get => tonnageDWT; set => tonnageDWT = value; }  
     }
 }
